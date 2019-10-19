@@ -33,15 +33,16 @@ parts:
 #    source: .
     source: https://github.com/lxqt/screengrab.git
     source-type: git
-#    source-tag: "1.101"
-    source-depth: 1
+    source-tag: "1.101"
+#    source-depth: 1
     plugin: cmake
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
-#      - -DCMAKE_BUILD_TYPE=Snap
-#      - -DDEV_VERSION=snap
+      - -DCMAKE_INSTALL_LIBDIR=/usr/lib
+      - -DCMAKE_BUILD_TYPE=Snap
+      - -DDEV_VERSION=snap
+      #- -DSG_EXT_UPLOADS=OFF
 
-#    qt-version: qt5
     after: [desktop-qt5]
     build-packages:
         - g++
@@ -50,18 +51,17 @@ parts:
         - qttools5-dev
         - qttools5-dev-tools
 #devから
-#        - libqt5svg5-dev
-#        - libqt5x11extras5-dev
-#        - libqt5xdg-dev
-#        - libqt5xdgiconloader-dev
-#        - libx11-dev
-#        - libx11-xcb-dev
-#        - libxcb1-dev
-#        - libxcb-xfixes0-dev
-        #- pkg-config
+        - libqt5svg5-dev
+        - libqt5x11extras5-dev
+        - libqt5xdg-dev
+        - libqt5xdgiconloader-dev
+        - libx11-dev
+        - libx11-xcb-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        #- pkg-config   # snapでは不要？
     stage-packages:
-        - libc6
-        #- libc6
+        #- libc6    # libuploader.so のために必要 LD_LIBRARY_PATHの関係
         - libgcc1
         - libkf5windowsystem5
         - libqt5core5a
@@ -112,6 +112,6 @@ apps:
     plugs: [unity7, x11, opengl, gsettings, home, network, network-bind, removable-media, raw-usb, wayland, desktop-legacy, desktop]
     desktop: usr/share/applications/screengrab.desktop
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab
       # Use GTK3 cursor theme, icon theme and open/save file dialogs.
       QT_QPA_PLATFORMTHEME: gtk3
