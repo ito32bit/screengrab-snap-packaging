@@ -1,0 +1,117 @@
+name: screengrab-snap # you probably want to 'snapcraft register <name>'
+base: core18 # the base snap is the execution environment for this snap
+version: git
+summary: creating screenshots (unofficial)
+description: |
+ a crossplatform application for fast creating screenshots of your desktop. 
+   This is the unofficial snap packaging.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+#confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+architectures:
+#  - build-on: all
+  - build-on: i386
+
+plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes:gtk-3-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes:icon-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes:sounds-themes
+
+parts:
+  screengrab-snap:
+#    source: .
+    source: https://github.com/lxqt/screengrab.git
+    source-type: git
+#    source-tag: "1.101"
+    source-depth: 1
+    plugin: cmake
+    configflags:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+#      - -DCMAKE_BUILD_TYPE=Snap
+#      - -DDEV_VERSION=snap
+
+#    qt-version: qt5
+    after: [desktop-qt5]
+    build-packages:
+        - g++
+        - libkf5windowsystem-dev
+        - qtbase5-dev
+        - qttools5-dev
+        - qttools5-dev-tools
+#devから
+#        - libqt5svg5-dev
+#        - libqt5x11extras5-dev
+#        - libqt5xdg-dev
+#        - libqt5xdgiconloader-dev
+#        - libx11-dev
+#        - libx11-xcb-dev
+#        - libxcb1-dev
+#        - libxcb-xfixes0-dev
+        #- pkg-config
+    stage-packages:
+        - libc6
+        #- libc6
+        - libgcc1
+        - libkf5windowsystem5
+        - libqt5core5a
+        - libqt5dbus5
+        - libqt5gui5
+        - libqt5network5
+        - libqt5widgets5
+        - libqt5x11extras5
+        - libqt5xdg3
+        - libstdc++6
+        - libx11-xcb1
+        - libxcb-xfixes0
+#追加
+        - qt5-gtk-platformtheme
+#        - qttranslations5-l10n
+        - ttf-ubuntu-font-family
+        - dmz-cursor-theme
+        - light-themes
+        - adwaita-icon-theme
+
+  desktop-qt5:
+      source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+      source-subdir: qt
+      plugin: make
+      make-parameters: ["FLAVOR=qt5"]
+      build-packages:
+        - qtbase5-dev
+        - dpkg-dev
+      stage-packages:
+        - libxkbcommon0
+        - ttf-ubuntu-font-family
+        - dmz-cursor-theme
+        - light-themes
+        - adwaita-icon-theme
+        - gnome-themes-standard
+        - shared-mime-info
+        - libqt5gui5
+        - libgdk-pixbuf2.0-0
+        - libgtk2.0-0
+        - libqt5svg5 # for loading icon themes which are svg
+        - try: [appmenu-qt5] # not available on core18
+        - locales-all
+
+
+apps:
+  screengrab-snap:
+    command: desktop-launch screengrab
+    plugs: [unity7, x11, opengl, gsettings, home, network, network-bind, removable-media, raw-usb, wayland, desktop-legacy, desktop]
+    desktop: usr/share/applications/screengrab.desktop
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab
+      # Use GTK3 cursor theme, icon theme and open/save file dialogs.
+      QT_QPA_PLATFORMTHEME: gtk3
