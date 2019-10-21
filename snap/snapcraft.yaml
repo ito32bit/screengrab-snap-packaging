@@ -3,8 +3,8 @@ base: core18 # the base snap is the execution environment for this snap
 version: git
 summary: creating screenshots (unofficial)
 description: |
- a crossplatform application for fast creating screenshots of your desktop. 
-   This is the unofficial snap packaging.
+  a crossplatform application for fast creating screenshots of your desktop. 
+  This is the unofficial snap packaging.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 #confinement: devmode # use 'strict' once you have the right plugs and slots
@@ -17,15 +17,15 @@ architectures:
 plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
   gtk-3-themes:
     interface: content
-    target: $SNAP/data-dir/themes
+    target: usr/share/themes
     default-provider: gtk-common-themes:gtk-3-themes
   icon-themes:
     interface: content
-    target: $SNAP/data-dir/icons
+    target: usr/share/icons
     default-provider: gtk-common-themes:icon-themes
   sound-themes:
     interface: content
-    target: $SNAP/data-dir/sounds
+    target: usr/share/sounds
     default-provider: gtk-common-themes:sounds-themes
 
 parts:
@@ -40,7 +40,7 @@ parts:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_INSTALL_LIBDIR=/usr/lib
       - -DCMAKE_BUILD_TYPE=Snap
-      - -DDEV_VERSION=snap
+      - -DDEV_VERSION=Snap
       #- -DSG_EXT_UPLOADS=OFF
 
     after: [desktop-qt5]
@@ -50,7 +50,7 @@ parts:
         - qtbase5-dev
         - qttools5-dev
         - qttools5-dev-tools
-#devから
+#apt source から
         - libqt5svg5-dev
         - libqt5x11extras5-dev
         - libqt5xdg-dev
@@ -59,7 +59,7 @@ parts:
         - libx11-xcb-dev
         - libxcb1-dev
         - libxcb-xfixes0-dev
-        #- pkg-config   # snapでは不要？
+        - pkg-config   # snapでは不要？
     stage-packages:
         #- libc6    # libuploader.so のために必要 LD_LIBRARY_PATHの関係
         - libgcc1
@@ -81,6 +81,13 @@ parts:
         - dmz-cursor-theme
         - light-themes
         - adwaita-icon-theme
+    organize:
+      usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
+
+  qt5-gtk-platform:
+    plugin: nil
+    stage-packages:
+      - qt5-gtk-platformtheme
 
   desktop-qt5:
       source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
@@ -109,7 +116,7 @@ parts:
 apps:
   screengrab-snap:
     command: desktop-launch screengrab
-    plugs: [unity7, x11, opengl, gsettings, home, network, network-bind, removable-media, raw-usb, wayland, desktop-legacy, desktop]
+    plugs: [unity7, x11, opengl, gsettings, home, network, network-bind, removable-media, raw-usb, wayland, desktop-legacy, desktop, mount-observe, hostname-control]
     desktop: usr/share/applications/screengrab.desktop
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab
