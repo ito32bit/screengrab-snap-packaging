@@ -1,5 +1,5 @@
-name: screengrab-snap # you probably want to 'snapcraft register <name>'
-base: core18 # the base snap is the execution environment for this snap
+name: screengrab-snap
+base: core18
 version: git
 summary: creating screenshots (unofficial)
 description: |
@@ -30,11 +30,9 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
 
 parts:
   screengrab-snap:
-#    source: .
     source: https://github.com/lxqt/screengrab.git
     source-type: git
     source-tag: "1.101"
-#    source-depth: 1
     plugin: cmake
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -59,9 +57,8 @@ parts:
         - libx11-xcb-dev
         - libxcb1-dev
         - libxcb-xfixes0-dev
-        - pkg-config   # snapでは不要？
+        - pkg-config
     stage-packages:
-        #- libc6    # libuploader.so のために必要 LD_LIBRARY_PATHの関係
         - libgcc1
         - libkf5windowsystem5
         - libqt5core5a
