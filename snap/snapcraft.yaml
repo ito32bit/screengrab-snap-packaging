@@ -8,8 +8,7 @@ description: |
   Upstream: https://github.com/lxqt/screengrab
 
 grade: stable
-#confinement: devmode # use 'strict' once you have the right plugs and slots
-confinement: strict # use 'strict' once you have the right plugs and slots
+confinement: strict
 
 architectures:
 #  - build-on: all
