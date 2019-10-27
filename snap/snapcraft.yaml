@@ -82,11 +82,10 @@ parts:
         - dmz-cursor-theme
         - light-themes
         - adwaita-icon-theme
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       add-apt-repository ppa:lxqt/ppa
       apt-get update
-      apt-get install --no-install-recommends --yes libqt5xdg-dev
-      snapcraftctl build
 #
     organize:
       usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
