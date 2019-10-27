@@ -79,8 +79,8 @@ parts:
         - light-themes
         - adwaita-icon-theme
     override-build: |
-      sudo add-apt-repository ppa:lxqt/ppa
-      sudo apt-get update
+      add-apt-repository ppa:lxqt/ppa
+      apt-get update
       snapcraftctl build
 #
     organize:
