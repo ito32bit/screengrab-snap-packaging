@@ -78,6 +78,11 @@ parts:
         - dmz-cursor-theme
         - light-themes
         - adwaita-icon-theme
+    override-build: |
+      sudo add-apt-repository ppa:lxqt/ppa
+      sudo apt-get update
+      snapcraftctl build
+#
     organize:
       usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
 
