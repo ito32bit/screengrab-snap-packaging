@@ -120,7 +120,11 @@ parts:
 
 apps:
   screengrab-snap:
-    command: desktop-launch screengrab
+    adapter: full
+    command: screengrab
+    command-chain:
+      - bin/desktop-launch
+      - bin/gtk3-env-launch
     plugs:
       - unity7
       - x11
