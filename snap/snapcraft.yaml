@@ -84,6 +84,7 @@ parts:
     override-build: |
       add-apt-repository ppa:lxqt/ppa
       apt-get update
+      apt-get install libqt5xdg-dev
       snapcraftctl build
 #
     organize:
