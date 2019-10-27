@@ -5,6 +5,7 @@ summary: creating screenshots (unofficial)
 description: |
   a crossplatform application for fast creating screenshots of your desktop. 
   This is the unofficial snap packaging.
+  Upstream: https://github.com/lxqt/screengrab
 
 grade: stable
 #confinement: devmode # use 'strict' once you have the right plugs and slots
