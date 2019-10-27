@@ -58,6 +58,8 @@ parts:
         - libxcb1-dev
         - libxcb-xfixes0-dev
         - pkg-config
+        #
+        - python3-apt
     stage-packages:
         - libgcc1
         - libkf5windowsystem5
