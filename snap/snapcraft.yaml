@@ -121,7 +121,7 @@ parts:
 apps:
   screengrab-snap:
     adapter: full
-    command: screengrab
+    command: usr/bin/screengrab
     command-chain:
       - bin/desktop-launch
       - bin/gtk3-env-launch
