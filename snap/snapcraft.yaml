@@ -58,8 +58,9 @@ parts:
         - libxcb1-dev
         - libxcb-xfixes0-dev
         - pkg-config
-        #
-        - python3-apt
+        # override-build のため
+        - apt
+        - software-properties-common
     stage-packages:
         - libgcc1
         - libkf5windowsystem5
