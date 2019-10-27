@@ -121,7 +121,21 @@ parts:
 apps:
   screengrab-snap:
     command: desktop-launch screengrab
-    plugs: [unity7, x11, opengl, gsettings, home, network, network-bind, removable-media, raw-usb, wayland, desktop-legacy, desktop, mount-observe, hostname-control]
+    plugs:
+      - unity7
+      - x11
+      - opengl
+      - gsettings
+      - home
+      - network
+      - network-bind
+      - removable-media
+      - raw-usb
+      - wayland
+      - desktop-legacy
+      - desktop
+      - mount-observe
+      - hostname-control
     desktop: usr/share/applications/screengrab.desktop
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab
