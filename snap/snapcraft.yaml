@@ -136,6 +136,9 @@ apps:
       - desktop
       - mount-observe
       - hostname-control
+      - mount-observe
+      - network-control
+      - hostname-control
     desktop: usr/share/applications/screengrab.desktop
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab
