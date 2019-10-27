@@ -18,15 +18,15 @@ architectures:
 plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
   gtk-3-themes:
     interface: content
-    target: usr/share/themes
+    target: $SNAP/data-dir/themes
     default-provider: gtk-common-themes:gtk-3-themes
   icon-themes:
     interface: content
-    target: usr/share/icons
+    target: $SNAP/data-dir/icons
     default-provider: gtk-common-themes:icon-themes
   sound-themes:
     interface: content
-    target: usr/share/sounds
+    target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes:sounds-themes
 
 parts:
