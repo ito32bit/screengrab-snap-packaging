@@ -32,8 +32,8 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
     default-provider: libqtxdg-snap
 
 layout:
-  /usr/share/screengrab/translations/:
-    bind: $SNAP/usr/share/screengrab/translations/
+  /usr/share/screengrab/translations:
+    bind: $SNAP/usr/share/screengrab/translations
 
 adopt-info: screengrab-snap
 parts:
