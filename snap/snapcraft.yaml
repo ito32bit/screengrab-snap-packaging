@@ -26,14 +26,10 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
     interface: content
     target: $SNAP/share/sounds
     default-provider: gtk-common-themes:sounds-themes
-#  libqtxdg-snap:
-#    interface: content
-#    target: $SNAP/libqtxdg-snap
-#    default-provider: libqtxdg-snap
-
-layout:
-  /var/lib/snapd/desktop/icons:
-    $SNAP/usr/share/icons
+  libqtxdg-snap:
+    interface: content
+    target: $SNAP/libqtxdg-snap
+    default-provider: libqtxdg-snap
 
 adopt-info: screengrab-snap
 parts:
@@ -50,7 +46,7 @@ parts:
 
     after: [desktop-qt5]
     build-snaps:
-      - libqtxdg-snap
+      - libqtxdg-snap/latest/edge
     build-packages:
         - g++
         - libkf5windowsystem-dev
@@ -64,8 +60,6 @@ parts:
         - libxcb1-dev
         - libxcb-xfixes0-dev
         - pkg-config
-    stage-snaps:
-      - libqtxdg-snap
     stage-packages:
         - libgcc1
         - libkf5windowsystem5
@@ -93,6 +87,8 @@ parts:
       snapcraftctl stage
       sed -e '/^Name/s/ScreenGrab/ScreenGrab-snap/i' -i usr/share/applications/screengrab.desktop
 #
+    organize:
+      usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
 
   qt5-gtk-platform:
     plugin: nil
@@ -122,6 +118,7 @@ parts:
         - try: [appmenu-qt5] # not available on core18
         - locales-all
 
+
 apps:
   screengrab-snap:
     adapter: full
@@ -147,7 +144,6 @@ apps:
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
-#      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab:$SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab:$SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
       # Use GTK3 cursor theme, icon theme and open/save file dialogs.
       QT_QPA_PLATFORMTHEME: gtk3
