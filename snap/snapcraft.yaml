@@ -51,7 +51,7 @@ parts:
 
     after: [desktop-qt5]
     build-snaps:
-      - libqtxdg-snap/latest/edge
+      - libqtxdg-snap
     build-packages:
         - g++
         - libkf5windowsystem-dev
