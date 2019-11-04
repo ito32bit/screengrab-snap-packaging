@@ -65,6 +65,7 @@ parts:
         - libxcb1-dev
         - libxcb-xfixes0-dev
         - pkg-config
+        - libglib2.0-dev
     stage-packages:
         - libgcc1
         - libkf5windowsystem5
