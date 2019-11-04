@@ -47,7 +47,7 @@ parts:
       - -DCMAKE_INSTALL_LIBDIR=lib
       - -DCMAKE_BUILD_TYPE=Snap
       - -DDEV_VERSION=Snap
-      #- -DSG_EXT_UPLOADS=OFF
+      - -DSG_EXT_UPLOADS=OFF
 
     after: [desktop-qt5]
     build-snaps:
