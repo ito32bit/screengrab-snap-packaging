@@ -44,7 +44,7 @@ parts:
     plugin: cmake
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DCMAKE_INSTALL_LIBDIR=/lib
+      - -DCMAKE_INSTALL_LIBDIR=lib
       - -DCMAKE_BUILD_TYPE=Snap
       - -DDEV_VERSION=Snap
       #- -DSG_EXT_UPLOADS=OFF
@@ -149,6 +149,6 @@ apps:
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/lib/screengrab:$SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab:$SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
       # Use GTK3 cursor theme, icon theme and open/save file dialogs.
       QT_QPA_PLATFORMTHEME: gtk3
