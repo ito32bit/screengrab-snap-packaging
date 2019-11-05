@@ -15,6 +15,7 @@ This is the unofficial snap packaging.
 
     sudo snap install screengrab-snap
 or
+
     sudo snap install screengrab-snap --edge
 
 ## Uninstall
