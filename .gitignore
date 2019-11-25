@@ -1,4 +1,10 @@
-*.snap
 parts/
 prime/
 stage/
+*.snap
+*-snap_s390x*.txt
+*-snap_ppc64el*.txt
+*-snap_arm64*.txt
+*-snap_armhf*.txt
+*-snap_amd64*.txt
+*-snap_i386*.txt
