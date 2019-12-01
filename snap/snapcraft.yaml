@@ -30,6 +30,10 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
 layout:
   /usr/share/screengrab:
     bind: $SNAP/usr/share/screengrab
+  /usr/lib/screengrab:
+    bind: $SNAP/usr/lib/screengrab
+  /usr/share/doc/screengrab:
+    bind: $SNAP/usr/share/doc/screengrab
 
 adopt-info: screengrab-snap
 apps:
@@ -57,7 +61,7 @@ apps:
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/screengrab:$SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+      LD_LIBRARY_PATH: $SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
       # Use GTK3 cursor theme, icon theme and open/save file dialogs.
       QT_QPA_PLATFORMTHEME: gtk3
 
