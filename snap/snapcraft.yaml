@@ -106,6 +106,7 @@ parts:
     override-stage: |
       snapcraftctl stage
       sed -e '/^Name/s/$/ - snap/' -i usr/share/applications/screengrab.desktop
+      sed -e 's|Icon=screengrab|Icon=${SNAP}/usr/share/icons/hicolor/32x32/apps/screengrab.png|g' -i usr/share/applications/screengrab.desktop
 #
     stage-packages:
       - libgcc1
