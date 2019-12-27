@@ -22,10 +22,6 @@ plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
     interface: content
     target: $SNAP/share/sounds
     default-provider: gtk-common-themes:sounds-themes
-  libqtxdg-snap:
-    interface: content
-    target: $SNAP/libqtxdg-snap
-    default-provider: libqtxdg-snap
 
 layout:
   /usr/share/screengrab:
@@ -61,7 +57,6 @@ apps:
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
-      LD_LIBRARY_PATH: $SNAP/libqtxdg-snap/lib:$SNAP/libqtxdg-snap/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
       # Use GTK3 cursor theme, icon theme and open/save file dialogs.
       QT_QPA_PLATFORMTHEME: gtk3
 
@@ -88,7 +83,7 @@ parts:
       snapcraftctl set-version $ver
 #
     build-snaps:
-      - libqtxdg-snap
+      - libqtxdg-snap/latest/edge
     build-packages:
       - g++
       - libkf5windowsystem-dev
@@ -109,6 +104,8 @@ parts:
       sed -e '/^Name/s/$/ - snap/' -i usr/share/applications/screengrab.desktop
       sed -e 's|Icon=screengrab|Icon=${SNAP}/usr/share/icons/hicolor/32x32/apps/screengrab.png|g' -i usr/share/applications/screengrab.desktop
 #
+    stage-snaps:
+      - libqtxdg-snap/latest/edge
     stage-packages:
       - libgcc1
       - libkf5windowsystem5
