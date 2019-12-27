@@ -69,6 +69,7 @@ parts:
   screengrab-snap:
     source: https://github.com/lxqt/screengrab.git
     source-type: git
+    source-commit: b31bc6c37a273e50c298b2082f775404bdfedc03
     plugin: cmake
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
