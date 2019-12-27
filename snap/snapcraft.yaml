@@ -9,14 +9,6 @@ description: |
 grade: stable
 confinement: strict
 
-layout:
-  /usr/share/screengrab:
-    bind: $SNAP/usr/share/screengrab
-  /usr/lib/screengrab:
-    bind: $SNAP/usr/lib/screengrab
-  /usr/share/doc/screengrab:
-    bind: $SNAP/usr/share/doc/screengrab
-
 adopt-info: screengrab-snap
 apps:
   screengrab-snap:
@@ -50,7 +42,7 @@ parts:
     source-commit: b31bc6c37a273e50c298b2082f775404bdfedc03
     plugin: cmake
     configflags:
-      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current/usr
       - -DCMAKE_INSTALL_LIBDIR=lib
       - -DCMAKE_BUILD_TYPE=Snap
       - -DDEV_VERSION=Snap
@@ -113,6 +105,7 @@ parts:
       - adwaita-icon-theme
       - fcitx-frontend-qt5
     organize:
+      snap/$SNAPCRAFT_PROJECT_NAME/current/usr: usr
       usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
 
   desktop-qt5:
