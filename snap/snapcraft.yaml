@@ -44,8 +44,6 @@ apps:
       - opengl
       - gsettings
       - home
-      - network
-      - network-bind
       - removable-media
       - raw-usb
       - wayland
@@ -53,7 +51,6 @@ apps:
       - desktop
       - mount-observe
       - hostname-control
-      - network-control
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
