@@ -9,28 +9,6 @@ description: |
 grade: stable
 confinement: strict
 
-plugs: # plugs for theming, font settings, cursor and to use gtk3 file chooser
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/share/themes
-    default-provider: gtk-common-themes:gtk-3-themes
-  icon-themes:
-    interface: content
-    target: $SNAP/share/icons
-    default-provider: gtk-common-themes:icon-themes
-  sound-themes:
-    interface: content
-    target: $SNAP/share/sounds
-    default-provider: gtk-common-themes:sounds-themes
-
-layout:
-  /usr/share/screengrab:
-    bind: $SNAP/usr/share/screengrab
-  /usr/lib/screengrab:
-    bind: $SNAP/usr/lib/screengrab
-  /usr/share/doc/screengrab:
-    bind: $SNAP/usr/share/doc/screengrab
-
 adopt-info: screengrab-snap
 apps:
   screengrab-snap:
@@ -54,8 +32,7 @@ apps:
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
     environment:
-      # Use GTK3 cursor theme, icon theme and open/save file dialogs.
-      QT_QPA_PLATFORMTHEME: gtk3
+      HOME: /home/$LOGNAME
 
 parts:
   screengrab-snap:
@@ -64,7 +41,7 @@ parts:
     source-commit: b31bc6c37a273e50c298b2082f775404bdfedc03
     plugin: cmake
     configflags:
-      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_INSTALL_PREFIX=/snap/$SNAPCRAFT_PROJECT_NAME/current/usr
       - -DCMAKE_INSTALL_LIBDIR=lib
       - -DCMAKE_BUILD_TYPE=Snap
       - -DDEV_VERSION=Snap
@@ -120,7 +97,6 @@ parts:
       - libx11-xcb1
       - libxcb-xfixes0
       - libqt5xml5
-      - qt5-gtk-platformtheme
       - qttranslations5-l10n
       - ttf-ubuntu-font-family
       - dmz-cursor-theme
@@ -128,12 +104,8 @@ parts:
       - adwaita-icon-theme
       - fcitx-frontend-qt5
     organize:
+      snap/$SNAPCRAFT_PROJECT_NAME/current/usr: usr
       usr/share/qt5/translations/*.qm: usr/share/screengrab/translations/
-
-  qt5-gtk-platform:
-    plugin: nil
-    stage-packages:
-      - qt5-gtk-platformtheme
 
   desktop-qt5:
       source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
