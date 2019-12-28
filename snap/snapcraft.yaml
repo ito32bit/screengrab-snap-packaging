@@ -31,6 +31,8 @@ apps:
       - hostname-control
       - browser-support
     desktop: usr/share/applications/screengrab.desktop
+    environment:
+      HOME: /home/$LOGNAME
 
 parts:
   screengrab-snap:
