@@ -47,7 +47,9 @@ parts:
       - -DDEV_VERSION=Snap
       - -DSG_EXT_UPLOADS=OFF
 
-    after: [desktop-qt5]
+    after:
+      - desktop-qt5
+      - libqtxdg-snap
     override-pull: |
       snapcraftctl pull
       c1=`git log --oneline -n 1`
@@ -60,8 +62,6 @@ parts:
       echo "Set version: $ver"
       snapcraftctl set-version $ver
 
-    build-snaps:
-      - libqtxdg-snap/latest/edge
     build-packages:
       - g++
       - libkf5windowsystem-dev
@@ -82,8 +82,6 @@ parts:
       sed -e '/^Name/s/$/ - snap/' -i usr/share/applications/screengrab.desktop
       sed -e 's|Icon=screengrab|Icon=${SNAP}/usr/share/icons/hicolor/32x32/apps/screengrab.png|g' -i usr/share/applications/screengrab.desktop
 #
-    stage-snaps:
-      - libqtxdg-snap/latest/edge
     stage-packages:
       - libgcc1
       - libkf5windowsystem5
@@ -129,3 +127,33 @@ parts:
         - libqt5svg5 # for loading icon themes which are svg
         - try: [appmenu-qt5] # not available on core18
         - locales-all
+
+  libqtxdg-snap:
+    source: https://github.com/lxqt/libqtxdg.git
+    source-type: git
+    source-commit: 5a7d30f1345bff5908b73a26e613d076bf28badb
+    plugin: cmake
+
+    build-snaps:
+      - lxqt-build-tools-snap/latest/edge
+    build-packages:
+      - g++
+      - libmagic-dev
+      - libqt5svg5-dev
+      - pkg-config
+      - qtbase5-private-dev
+      - qttools5-dev
+      - qttools5-dev-tools
+    stage-packages:
+      - libfile-mimeinfo-perl
+      - shared-mime-info
+      - file
+      - libglib2.0-bin
+      - libqt5core5a
+      - libqt5dbus5
+      - libqt5gui5
+      - libqt5widgets5
+      - libqt5xml5
+      - libstdc++6
+      - try: [gtk-update-icon-cache]
+      - libmagic1
